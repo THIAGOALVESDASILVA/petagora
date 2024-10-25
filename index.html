@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Petágora - Em Breve Novidades</title>
+    <link rel="icon" href="images/forno.png" type="image/png">
+    <style>
+        body {
+            background-color: #4B0082; /* Roxo intenso */
+            color: #FFFFFF;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 4em;
+            text-align: center;
+            margin-top: 50px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 30px #FF00FF, 0 0 40px #FF00FF;
+            }
+            to {
+                text-shadow: 0 0 20px #FFFFFF, 0 0 30px #FF00FF, 0 0 40px #FF00FF, 0 0 50px #FF00FF;
+            }
+        }
+
+        #oven {
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            animation-delay: 2s; /* A imagem aparece antes da frase */
+        }
+
+        p {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            animation-delay: 4s; /* A frase aparece depois da imagem */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Petágora</h1>
+    <img src="images/forno.png" alt="Forno" id="oven">
+    <p id="message">Em breve virão novidades...</p>
+
+    <script>
+        // Animação das letras do título
+        const title = document.getElementById('title');
+        const letters = title.textContent.split('');
+        title.textContent = '';
+        letters.forEach((letter, i) => {
+            const span = document.createElement('span');
+            span.textContent = letter;
+            span.style.animation = `float ${letters.length * 0.1}s infinite ease-in-out`;
+            span.style.animationDelay = `${i * 0.1}s`;
+            title.appendChild(span);
+        });
+
+        // Keyframes para flutuação das letras
+        const styleSheet = document.styleSheets[0];
+        styleSheet.insertRule(`
+            @keyframes float {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+                100% { transform: translateY(0); }
+            }
+        `, styleSheet.cssRules.length);
+    </script>
+
+</body>
+</html>
